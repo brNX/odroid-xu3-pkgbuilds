@@ -35,16 +35,19 @@ source=(
   'march.diff'
   '51-cec.rules'
   'mali.patch'
+  'hi10.patch'
 )
 sha256sums=('0faf8d49f4e25934a664258aacdbeaa7108e39c6a80667a4aa5f7105c0578d17'
             '3f5eb4e0fc8142c865e93ad88468b16e9c750f9994795ac06f1b9e9e3f570d0c'
             '42d5adfb911e889134f8b81b509fc15a145e4b3e78be9505a46c47a36100e96f'
-            '16c28ed97c0b2710a07a4bf7e4d5d23a1efcfd9fddc2334ce53a0f0003e1f31c')
+            '16c28ed97c0b2710a07a4bf7e4d5d23a1efcfd9fddc2334ce53a0f0003e1f31c'
+            '0a88495ccbc9d5ef5e22da0558282761a80fd9ccc7eea8e27e8eba463aad346e')
 
 prepare() {
   cd "$srcdir/xbmc-$_commit"
   patch -p0 < ../march.diff
   patch -p1 < ../mali.patch
+  patch -p1 < ../hi10.patch
   find -type f -name *.py -exec sed 's|^#!.*python$|#!/usr/bin/python2|' -i "{}" +
   sed 's|^#!.*python$|#!/usr/bin/python2|' -i tools/depends/native/rpl-native/rpl
   sed 's/python/python2/' -i tools/Linux/kodi.sh.in
